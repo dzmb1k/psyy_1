@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Лейла Доева — психолог</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage: #8B9E7C;
+  --sage-light: #C4D1B8;
+  --sage-dark: #5A6E50;
+  --cream: #F5F0E8;
+  --warm-white: #FAF8F4;
+  --blush: #E8C4B0;
+  --blush-dark: #C8946E;
+  --terracotta: #C97B55;
+  --deep: #2C2416;
+  --mid: #5C4F3C;
+  --muted: #8C7F6E;
+  --glass: rgba(255,255,255,0.55);
+  --glass-border: rgba(255,255,255,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: var(--deep);
+  background: var(--warm-white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+#cursor {
+  position: fixed; top: 0; left: 0;
+  width: 12px; height: 12px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+  mix-blend-mode: multiply;
+}
+#cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--terracotta);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
+  opacity: 0.5;
+}
+body.cursor-hover #cursor { width: 20px; height: 20px; background: var(--blush-dark); }
+body.cursor-hover #cursor-ring { width: 52px; height: 52px; opacity: 0.3; }
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 2px; }
+
+/* NAVBAR */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(250,248,244,0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 12px 60px;
+  box-shadow: 0 1px 0 rgba(139,158,124,0.15);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--deep);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--terracotta); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--terracotta); }
+.nav-cta {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border: 1.5px solid var(--terracotta);
+  border-radius: 40px;
+  color: var(--terracotta);
+  background: transparent;
+  cursor: none;
+  transition: background 0.3s, color 0.3s;
+  text-decoration: none;
+}
+.nav-cta:hover { background: var(--terracotta); color: white; }
+.nav-burger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; padding: 4px; }
+.nav-burger span { display: block; width: 24px; height: 1.5px; background: var(--deep); transition: all 0.3s; }
+
+/* HERO */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(145deg, #F0EBE0 0%, #E8DDD0 40%, #DDD5C5 100%);
+}
+#three-canvas {
+  position: absolute; inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 60px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.3s forwards;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.4rem, 6vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--deep);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.5s forwards;
+}
+.hero-title em { font-style: italic; color: var(--terracotta); }
+#typewriter-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--sage-dark);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  min-height: 2.2em;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.8s forwards;
+}
+.typewriter-cursor { animation: blink 1s infinite; }
+.hero-actions {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.9s 1s forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  background: var(--terracotta);
+  color: white;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none; cursor: none;
+  border-radius: 40px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.btn-primary:hover { background: var(--blush-dark); box-shadow: 0 8px 32px rgba(201,123,85,0.35); }
+.btn-primary .arrow { transition: transform 0.3s; display: inline-block; }
+.btn-primary:hover .arrow { transform: translateX(5px); }
+.btn-ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+@keyframes ripple { to { transform: scale(4); opacity: 0; } }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  border: 1.5px solid var(--sage);
+  border-radius: 40px;
+  color: var(--sage-dark);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: transparent; cursor: none;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.btn-outline:hover { border-color: var(--sage-dark); background: rgba(139,158,124,0.08); }
+
+/* HERO STATS */
+.hero-stats {
+  display: flex; gap: 40px; flex-wrap: wrap;
+  margin-top: 48px;
+  opacity: 0;
+  animation: fadeUp 0.9s 1.1s forwards;
+}
+.stat-item { }
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: var(--deep);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* HERO IMAGE */
+.hero-image-wrap {
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1.2s 0.6s forwards;
+}
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  filter: sepia(12%) saturate(0.9);
+}
+.hero-badge {
+  position: absolute; bottom: -24px; left: -24px;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  max-width: 200px;
+}
+.badge-cert { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.badge-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; margin-top: 4px; color: var(--deep); }
+
+/* WAVE DIVIDER */
+.wave-divider {
+  width: 100%; overflow: hidden; line-height: 0;
+  background: transparent;
+}
+.wave-divider svg { display: block; }
+
+/* SECTION DEFAULTS */
+section { position: relative; }
+.section-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--deep);
+  margin-bottom: 20px;
+}
+.section-subtitle {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 520px;
+}
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ABOUT */
+#about { background: var(--warm-white); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-image-stack { position: relative; }
+.about-img-main {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  filter: sepia(8%) saturate(0.95);
+}
+.about-img-float {
+  position: absolute; bottom: -30px; right: -30px;
+  width: 55%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  filter: sepia(8%) saturate(0.95);
+  border: 5px solid var(--warm-white);
+}
+.about-tags {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 28px;
+}
+.tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border: 1px solid var(--sage-light);
+  border-radius: 20px;
+  color: var(--sage-dark);
+  background: rgba(196,209,184,0.15);
+}
+.about-text p { font-size: 1rem; line-height: 1.9; color: var(--mid); margin-bottom: 18px; }
+.about-text p:last-child { margin-bottom: 0; }
+
+/* COUNTER */
+.counter-row {
+  display: flex; gap: 0; margin: 40px 0;
+  border-top: 1px solid var(--sage-light);
+  border-bottom: 1px solid var(--sage-light);
+}
+.counter-item {
+  flex: 1; padding: 24px 0;
+  border-right: 1px solid var(--sage-light);
+  text-align: center;
+}
+.counter-item:last-child { border-right: none; }
+.counter-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--terracotta);
+  line-height: 1;
+}
+.counter-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+/* SERVICES */
+#services { background: #EEE8DE; }
+.services-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 60px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.service-card {
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(92,79,60,0.12); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon {
+  width: 48px; height: 48px;
+  border: 1.5px solid var(--sage-light);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  color: var(--sage-dark);
+}
+.service-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--deep);
+  margin-bottom: 12px;
+}
+.service-desc { font-size: 0.9rem; line-height: 1.8; color: var(--mid); margin-bottom: 28px; }
+.service-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+.service-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--terracotta);
+}
+.service-duration { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.service-badge {
+  position: absolute; top: 20px; right: 20px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  background: var(--sage);
+  color: white;
+  border-radius: 20px;
+}
+
+/* HOW IT WORKS */
+#process { background: var(--warm-white); }
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  margin-top: 60px;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 36px; left: 12.5%; right: 12.5%;
+  height: 1px;
+  background: linear-gradient(to right, var(--sage-light), var(--blush), var(--sage-light));
+}
+.process-step { padding: 0 24px; text-align: center; }
+.step-num {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1.5px solid var(--sage-light);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--terracotta);
+  position: relative; z-index: 1;
+  transition: background 0.3s, border-color 0.3s;
+}
+.process-step:hover .step-num { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+.step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 500; color: var(--deep); margin-bottom: 10px; }
+.step-desc { font-size: 0.85rem; line-height: 1.8; color: var(--muted); }
+
+/* TESTIMONIALS */
+#testimonials { background: var(--deep); overflow: hidden; }
+#testimonials .section-title { color: var(--cream); }
+#testimonials .section-tag { color: var(--blush); }
+#testimonials .section-subtitle { color: rgba(245,240,232,0.55); }
+.testimonials-track-wrap {
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+}
+.testimonials-track {
+  display: flex;
+  gap: 28px;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.testimonial-card {
+  flex: 0 0 calc(33.333% - 20px);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 40px;
+}
+.test-stars { color: var(--blush); font-size: 1rem; letter-spacing: 4px; margin-bottom: 20px; }
+.test-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.88);
+  margin-bottom: 28px;
+}
+.test-author { display: flex; align-items: center; gap: 14px; }
+.test-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(30%);
+}
+.test-name { font-size: 0.85rem; font-weight: 500; color: var(--cream); }
+.test-meta { font-size: 0.72rem; color: rgba(245,240,232,0.45); margin-top: 2px; }
+.test-nav {
+  display: flex; gap: 12px;
+  margin-top: 40px;
+}
+.test-dot {
+  width: 28px; height: 2px;
+  background: rgba(255,255,255,0.25);
+  cursor: none;
+  transition: background 0.3s, width 0.3s;
+  border: none;
+}
+.test-dot.active { background: var(--blush); width: 44px; }
+
+/* BLOG */
+#blog { background: var(--cream); }
+.blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px; margin-top: 60px; }
+.blog-card {
+  background: white;
+  overflow: hidden;
+  border-radius: 18px;
+  transition: box-shadow 0.4s;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+.blog-card:hover { box-shadow: 0 16px 48px rgba(92,79,60,0.1); }
+.blog-img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  filter: sepia(10%) saturate(0.9);
+  transition: transform 0.5s ease;
+}
+.blog-card:hover .blog-img { transform: scale(1.04); }
+.blog-img-wrap { overflow: hidden; }
+.blog-body { padding: 28px 32px; }
+.blog-date { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.blog-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--deep);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.blog-excerpt { font-size: 0.88rem; line-height: 1.8; color: var(--mid); margin-bottom: 20px; }
+.blog-link { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); display: flex; align-items: center; gap: 8px; }
+
+/* FAQ */
+#faq { background: var(--warm-white); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; align-items: start; }
+.faq-list { list-style: none; }
+.faq-item {
+  border-bottom: 1px solid var(--sage-light);
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%; text-align: left;
+  padding: 22px 0;
+  background: none; border: none; cursor: none;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--deep);
+  gap: 16px;
+}
+.faq-icon {
+  width: 28px; height: 28px;
+  border: 1px solid var(--sage-light);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sage-dark);
+  transition: transform 0.3s, background 0.3s;
+}
+.faq-icon svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.4s; }
+.faq-item.open .faq-icon svg { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.faq-answer-inner { padding: 0 0 20px; font-size: 0.9rem; line-height: 1.9; color: var(--mid); }
+.faq-image-side { position: relative; }
+.faq-quote-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: sepia(12%) saturate(0.9); border-radius: 20px; }
+.faq-pull-quote {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--terracotta);
+  color: white;
+  padding: 28px 32px;
+  border-radius: 20px;
+  max-width: 240px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* BOOKING FORM */
+#booking { background: linear-gradient(160deg, #EEE8DE 0%, #E4DDD2 100%); }
+.booking-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+.booking-info .section-title { margin-bottom: 16px; }
+.booking-assurances { margin-top: 40px; }
+.assurance {
+  display: flex; gap: 16px; align-items: flex-start;
+  margin-bottom: 22px;
+}
+.assurance-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border: 1px solid var(--sage-light);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sage-dark);
+}
+.assurance-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.assurance-text strong { display: block; font-size: 0.85rem; font-weight: 500; color: var(--deep); margin-bottom: 2px; }
+.assurance-text span { font-size: 0.82rem; color: var(--muted); }
+
+.booking-form { background: white; padding: 48px; border-radius: 24px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { margin-bottom: 20px; }
+.form-group.full { grid-column: 1 / -1; }
+label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #DDD6CC;
+  background: var(--warm-white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--deep);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  border-radius: 12px;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(201,123,85,0.08);
+}
+.field-error {
+  font-size: 0.72rem;
+  color: #c0392b;
+  margin-top: 5px;
+  display: none;
+}
+.field-error.visible { display: block; }
+textarea { resize: vertical; min-height: 100px; }
+select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C7F6E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+.form-submit { width: 100%; margin-top: 8px; }
+
+/* TOAST */
+#toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--deep);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 40px;
+  font-size: 0.9rem;
+  z-index: 500;
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s;
+  white-space: nowrap;
+}
+#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* SCROLL TO TOP */
+#scrolltop {
+  position: fixed; bottom: 32px; right: 32px;
+  width: 48px; height: 48px;
+  background: var(--terracotta);
+  color: white;
+  border: none; cursor: none;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 200;
+}
+#scrolltop svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+#scrolltop.visible { opacity: 1; pointer-events: all; }
+#scrolltop:hover { transform: translateY(-3px); }
+
+/* FOOTER */
+footer {
+  background: linear-gradient(160deg, #1C1810 0%, var(--deep) 100%);
+  color: rgba(245,240,232,0.7);
+  padding: 80px 60px 40px;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: var(--cream);
+  margin-bottom: 14px;
+}
+.footer-brand-name span { color: var(--blush); }
+.footer-tagline { font-size: 0.88rem; line-height: 1.8; margin-bottom: 28px; }
+.footer-socials { display: flex; gap: 12px; }
+.social-link {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(245,240,232,0.55);
+  text-decoration: none;
+  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.social-link:hover {
+  border-color: var(--blush);
+  color: var(--blush);
+  box-shadow: 0 0 16px rgba(232,196,176,0.25);
+}
+.social-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.footer-col h4 {
+  font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cream); margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a {
+  font-size: 0.88rem;
+  color: rgba(245,240,232,0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--blush); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 32px;
+  font-size: 0.78rem;
+  color: rgba(245,240,232,0.3);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.social-link:hover { animation: bounce 0.5s ease; }
+
+/* MOBILE NAV */
+.mobile-menu {
+  position: fixed; inset: 0;
+  background: var(--warm-white);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 32px;
+  z-index: 90;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.mobile-menu.open { transform: none; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: var(--deep);
+  text-decoration: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 18px 32px; }
+  nav.scrolled { padding: 12px 32px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+  .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 120px 32px 60px; }
+  .hero-image-wrap { order: -1; max-width: 360px; margin: 0 auto; }
+  .hero-badge { left: -10px; bottom: -10px; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-image-stack { max-width: 400px; margin-bottom: 30px; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-image-side { display: none; }
+  .booking-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .process-steps::before { display: none; }
+  .section-inner { padding: 70px 32px; }
+}
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .booking-form { padding: 28px 20px; }
+  footer { padding: 60px 24px 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .counter-row { flex-wrap: wrap; }
+  .counter-item { min-width: 45%; }
+  #scrolltop { bottom: 20px; right: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Toast -->
+<div id="toast">✓ Заявка отправлена — я свяжусь с вами в течение 24 часов</div>
+
+<!-- Scroll to top -->
+<button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+  <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">Обо мне</a>
+  <a href="#services" onclick="closeMobile()">Услуги</a>
+  <a href="#testimonials" onclick="closeMobile()">Отзывы</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#booking" onclick="closeMobile()">Записаться</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Лейла <span>Доева</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Обо мне</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#process">Процесс</a></li>
+    <li><a href="#testimonials">Отзывы</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#blog">Блог</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Записаться</a>
+  <button class="nav-burger" id="burgerBtn" onclick="toggleMobile()" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="three-canvas"></canvas>
+  <div class="hero-content">
+    <div>
+      <p class="hero-eyebrow">Клинический психолог · Онлайн и офлайн</p>
+      <h1 class="hero-title">
+        Путь к себе<br>начинается<br>с <em>одного шага</em>
+      </h1>
+      <p id="typewriter-text"><span id="typewriter-chars"></span><span class="typewriter-cursor">|</span></p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary" id="heroBtn">
+          Записаться на сессию <span class="arrow">→</span>
+        </a>
+        <a href="#about" class="btn-outline">Узнать больше</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Лет практики</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3 000+</div>
+          <div class="stat-label">Сессий проведено</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Клиентов довольны</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image-wrap reveal">
+      <img src="https://psyconsult.nosu.ru/wp-content/uploads/2023/11/djelieva-edited-2.jpeg" alt="Лейла Доева" class="hero-photo" loading="eager">
+      <div class="hero-badge">
+        <div class="badge-cert">Сертификат</div>
+        <div class="badge-text">Кандитат наук</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider" style="background:#EEE8DE;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 60 L0 30 Q180 0 360 30 Q540 60 720 30 Q900 0 1080 30 Q1260 60 1440 30 L1440 60 Z" fill="#FAF8F4"/>
+  </svg>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image-stack reveal">
+        <img src="https://avatars.mds.yandex.net/i?id=c65c57b27c8161c90adc1f3853be69de_sr-5888219-images-thumbs&n=13" alt="Лейла Доева" class="about-img-main" loading="lazy">
+      </div>
+      <div>
+        <p class="section-tag reveal">Обо мне</p>
+        <h2 class="section-title reveal">Лейла Доева, <br>Психолог</h2>
+        <div class="about-text">
+          <p class="reveal reveal-delay-1">Я помогаю людям найти внутренние ресурсы, справиться с тревогой, выгоранием, кризисами отношений — и снова почувствовать себя живым. Моя работа строится на уважении, безоценочности и глубоком доверии к вашему собственному потенциалу.</p>
+          <p class="reveal reveal-delay-2">В практике сочетаю методы когнитивно-поведенческой терапии, гештальт-подхода и EMDR — выбирая то, что лучше всего подходит именно вам.</p>
+        </div>
+        <div class="counter-row reveal reveal-delay-2">
+          <div class="counter-item">
+            <div class="counter-num" data-target="12" data-suffix=" лет">0</div>
+            <div class="counter-label">Опыт работы</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-num" data-target="3000" data-suffix="+">0</div>
+            <div class="counter-label">Сессий</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-num" data-target="98" data-suffix="%">0</div>
+            <div class="counter-label">Рекомендуют</div>
+          </div>
+        </div>
+        <div class="about-tags reveal reveal-delay-3">
+          <span class="tag">СОГУ</span>
+          <span class="tag">СОГМА</span>
+          <span class="tag">Пед институт</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider" style="background:#FAF8F4;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0 Q360 60 720 0 Q1080 -60 1440 0 L1440 60 L0 60 Z" fill="#EEE8DE"/>
+  </svg>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <p class="section-tag reveal">Услуги</p>
+        <h2 class="section-title reveal">Форматы работы</h2>
+      </div>
+      <p class="section-subtitle reveal" style="max-width:300px;text-align:right;">Выберите удобный<br>формат — я подстроюсь<br>под вас</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <h3 class="service-name">Индивидуальная терапия</h3>
+        <p class="service-desc">Личная работа в безопасном пространстве: тревога, депрессия, самооценка, жизненные кризисы, отношения с собой.</p>
+        <div class="service-footer">
+          <div>
+            <div class="service-price">3 500 ₽</div>
+            <div class="service-duration">50 минут · онлайн</div>
+          </div>
+          <a href="#booking" class="btn-primary" style="padding:10px 20px;font-size:0.75rem;">Записаться →</a>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="service-name">Пара и семья</h3>
+        <p class="service-desc">Работа с парами и семьями: конфликты, кризисы, потеря близости, восстановление доверия, подготовка к браку.</p>
+        <div class="service-footer">
+          <div>
+            <div class="service-price">5 500 ₽</div>
+            <div class="service-duration">80 минут · онлайн/офлайн</div>
+          </div>
+          <a href="#booking" class="btn-primary" style="padding:10px 20px;font-size:0.75rem;">Записаться →</a>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-2" style="position:relative;">
+        <span class="service-badge">Выгодно</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 class="service-name">Абонемент · 4 сессии</h3>
+        <p class="service-desc">Экономичный формат для глубокой работы. Четыре встречи с гарантированным временем — скидка 10% от базовой цены.</p>
+        <div class="service-footer">
+          <div>
+            <div class="service-price">12 500 ₽</div>
+            <div class="service-duration">4 × 50 мин · экономия 1 500 ₽</div>
+          </div>
+          <a href="#booking" class="btn-primary" style="padding:10px 20px;font-size:0.75rem;">Записаться →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:0;">
+      <p class="section-tag reveal">Как это работает</p>
+      <h2 class="section-title reveal" style="max-width:500px;margin:0 auto 16px;">Четыре шага к<br><em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--terracotta);">изменениям</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Первый контакт</h3>
+        <p class="step-desc">Заполните форму или напишите в мессенджер — отвечу в течение 24 часов и подберу удобное время.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Знакомство</h3>
+        <p class="step-desc">30-минутная бесплатная встреча: обсудим ваш запрос и решим, подходим ли мы друг другу.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Регулярная работа</h3>
+        <p class="step-desc">Еженедельные сессии в удобном формате. Отслеживаем прогресс и адаптируем подход.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Интеграция</h3>
+        <p class="step-desc">Закрепляем результаты, завершаем терапию осознанно — с поддержкой на каждом этапе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider" style="background:#FAF8F4;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 60 L0 40 Q360 0 720 40 Q1080 80 1440 40 L1440 60 Z" fill="#2C2416"/>
+  </svg>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0;">
+      <div>
+        <p class="section-tag reveal">Отзывы</p>
+        <h2 class="section-title reveal">Что говорят клиенты</h2>
+        <p class="section-subtitle reveal">Реальные истории реальных людей</p>
+      </div>
+    </div>
+    <div class="testimonials-track-wrap">
+      <div class="testimonials-track" id="testTrack">
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">«Я пришла к Лейле после развода — в полном отчаянии. За полгода работы я не просто "пережила" разрыв, я открыла в себе что-то очень важное. Впервые в жизни я по-настоящему понимаю, что мне нужно.»</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=70&auto=format&fit=crop&facepad=2" alt="Марина" class="test-avatar" loading="lazy">
+            <div>
+              <div class="test-name">Марина К.</div>
+              <div class="test-meta">Индивидуальная терапия · 6 месяцев</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">«Мы с женой обратились к Лейле, когда казалось, что всё кончено. Это было страшно сложно — но именно эта работа дала нам шанс. Теперь мы слышим друг друга. Не просто слушаем — слышим.»</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=70&auto=format&fit=crop&facepad=2" alt="Дмитрий" class="test-avatar" loading="lazy">
+            <div>
+              <div class="test-name">Дмитрий и Ольга Р.</div>
+              <div class="test-meta">Семейная терапия · 4 месяца</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">«Профессиональное выгорание заставило меня думать, что я сломан. Лейла помогла мне не "починиться", а пересмотреть саму систему ценностей. Сейчас я работаю с удовольствием — и знаю, почему.»</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=70&auto=format&fit=crop&facepad=2" alt="Алексей" class="test-avatar" loading="lazy">
+            <div>
+              <div class="test-name">Алексей Т.</div>
+              <div class="test-meta">Индивидуальная терапия · 8 месяцев</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">«Всю жизнь я боялась говорить о своих потребностях — казалось, это эгоизм. Лейла мягко и точно помогла мне увидеть: заботиться о себе — не слабость, а основа. Это изменило всё.»</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=70&auto=format&fit=crop&facepad=2" alt="Екатерина" class="test-avatar" loading="lazy">
+            <div>
+              <div class="test-name">Екатерина В.</div>
+              <div class="test-meta">Абонемент · 3 месяца</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="test-nav" id="testNav">
+      <button class="test-dot active" onclick="goSlide(0)"></button>
+      <button class="test-dot" onclick="goSlide(1)"></button>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider" style="background:#2C2416;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0 Q360 60 720 30 Q1080 0 1440 60 L1440 0 L0 0 Z" fill="#FAF8F4"/>
+  </svg>
+</div>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0;">
+      <div>
+        <p class="section-tag reveal">Блог</p>
+        <h2 class="section-title reveal">Статьи и мысли</h2>
+      </div>
+      <a href="#blog" class="btn-outline reveal" style="border-color:var(--sage-light);color:var(--muted);white-space:nowrap;">Все статьи →</a>
+    </div>
+    <div class="blog-grid">
+      <a href="#blog" class="blog-card reveal">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=700&q=75&auto=format&fit=crop" alt="Тревога" class="blog-img" loading="lazy">
+        </div>
+        <div class="blog-body">
+          <div class="blog-date">12 мая 2025</div>
+          <h3 class="blog-title">Как справиться с тревогой: пять практик, которые работают</h3>
+          <p class="blog-excerpt">Тревога — не враг. Это сигнал тела о том, что что-то важное требует внимания. Разбираем простые, но действенные техники регуляции нервной системы.</p>
+          <span class="blog-link">Читать статью <span>→</span></span>
+        </div>
+      </a>
+      <a href="#blog" class="blog-card reveal reveal-delay-1">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=700&q=75&auto=format&fit=crop" alt="Прокрастинация" class="blog-img" loading="lazy">
+        </div>
+        <div class="blog-body">
+          <div class="blog-date">28 апреля 2025</div>
+          <h3 class="blog-title">Почему мы откладываем важное: психология прокрастинации</h3>
+          <p class="blog-excerpt">За прокрастинацией почти всегда стоит не лень, а тревога или страх. Разбираемся, какие механизмы включаются, когда мы «не можем начать».</p>
+          <span class="blog-link">Читать статью <span>→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="faq-grid">
+      <div>
+        <p class="section-tag reveal">FAQ</p>
+        <h2 class="section-title reveal">Частые вопросы</h2>
+        <ul class="faq-list" style="margin-top:36px;">
+          <li class="faq-item reveal">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Как проходит первая сессия?
+              <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">Первая встреча — знакомство и сбор информации. Мы обсудим, что привело вас в терапию, что вы хотите изменить, и как вы видите идеальный результат. Никакого давления и обязательств — только разговор.</div></div>
+          </li>
+          <li class="faq-item reveal reveal-delay-1">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Как долго длится терапия?
+              <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">Зависит от запроса. Краткосрочная работа — 8–12 сессий для конкретной проблемы. Глубинная работа с личностными паттернами может занять год и более. Мы обсудим ориентировочные сроки на первой встрече.</div></div>
+          </li>
+          <li class="faq-item reveal reveal-delay-1">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Можно ли работать онлайн?
+              <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">Да, онлайн-терапия столь же эффективна, как и очная. Я работаю через Zoom или Telegram — по вашему выбору. Единственное условие: уединённое место, где вас никто не побеспокоит.</div></div>
+          </li>
+          <li class="faq-item reveal reveal-delay-2">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Вы соблюдаете конфиденциальность?
+              <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">Абсолютно. Всё, что происходит на сессии — остаётся между нами. Я работаю в рамках профессионального этического кодекса и не раскрываю информацию о клиентах третьим лицам.</div></div>
+          </li>
+          <li class="faq-item reveal reveal-delay-2">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Что, если терапия мне не подойдёт?
+              <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">Это нормально. Не каждый психолог подходит каждому клиенту — важна личная совместимость. Если после нескольких встреч вы почувствуете, что нам не по пути, я помогу найти коллегу, который лучше подходит вашему запросу.</div></div>
+          </li>
+        </ul>
+      </div>
+      <div class="faq-image-side reveal">
+        <img src="https://static.vecteezy.com/system/resources/previews/026/697/372/non_2x/female-psychotherapist-has-an-individual-session-with-her-patient-talk-therapy-concept-illustration-vector.jpg" alt="" class="faq-quote-img" loading="lazy">
+        <div class="faq-pull-quote">«Терапия — это не лечение болезни. Это разговор с собой, которого вы давно заслуживали.»</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider" style="background:#FAF8F4;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0 Q240 60 480 30 Q720 0 960 40 Q1200 80 1440 20 L1440 0 Z" fill="#EEE8DE"/>
+  </svg>
+</div>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-inner">
+    <div class="booking-grid">
+      <div class="booking-info">
+        <p class="section-tag reveal">Запись</p>
+        <h2 class="section-title reveal">Начнём ваш<br><em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--terracotta);">путь вместе</em></h2>
+        <p class="section-subtitle reveal">Заполните форму, и я свяжусь с вами в течение 24 часов для подтверждения удобного времени.</p>
+        <div class="booking-assurances">
+          <div class="assurance reveal reveal-delay-1">
+            <div class="assurance-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="assurance-text">
+              <strong>Полная конфиденциальность</strong>
+              <span>Ваши данные защищены и никогда не передаются третьим лицам</span>
+            </div>
+          </div>
+          <div class="assurance reveal reveal-delay-2">
+            <div class="assurance-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div class="assurance-text">
+              <strong>Ответ в течение 24 часов</strong>
+              <span>Обычно отвечаю значительно быстрее — в рабочее время</span>
+            </div>
+          </div>
+          <div class="assurance reveal reveal-delay-3">
+            <div class="assurance-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.34 2 2 0 0 1 3.6 1.16h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2z"/></svg></div>
+            <div class="assurance-text">
+              <strong>Бесплатная 30-мин встреча</strong>
+              <span>Знакомство без обязательств — убедитесь, что мы подходим друг другу</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="booking-form reveal">
+        <form id="bookingForm" onsubmit="submitForm(event)" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Ваше имя *</label>
+              <input type="text" id="fname" placeholder="Как вас зовут?" required>
+              <div class="field-error" id="err-fname">Пожалуйста, введите имя</div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон *</label>
+              <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" required>
+              <div class="field-error" id="err-phone">Введите корректный телефон</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+            <div class="field-error" id="err-email">Введите корректный email</div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="service">Услуга *</label>
+              <select id="service" required>
+                <option value="">Выберите формат...</option>
+                <option value="individual">Индивидуальная — 3 500 ₽</option>
+                <option value="couple">Пара / семья — 5 500 ₽</option>
+                <option value="subscription">Абонемент × 4 — 12 500 ₽</option>
+                <option value="free">Бесплатное знакомство</option>
+              </select>
+              <div class="field-error" id="err-service">Выберите услугу</div>
+            </div>
+            <div class="form-group">
+              <label for="datepref">Удобная дата</label>
+              <input type="date" id="datepref">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Расскажите о своём запросе</label>
+            <textarea id="message" placeholder="Кратко — с чем хотите поработать? (необязательно)"></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">
+            <span id="submitText">Отправить заявку</span> <span class="arrow">→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Лейла <span>Доева</span></div>
+        <p class="footer-tagline">Клинический психолог, MA.<br>Помогаю людям жить осознанно<br>и с собой в контакте — с 2012 года.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.19.708.962 1.271 1.722.981.568-.214 1.416-.979 1.416-.979l2.453-2.355 4.036 2.978c.8.646 1.994.287 2.21-.636L23.77 3.8c.177-.756-.147-1.79-.943-2.148a2.242 2.242 0 0 0-1.63-.219zm-.614 2.156L9.99 14.427l-.042.03-.041.035-1.878 1.8-.26-5.027 12.815-6.676z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="ВКонтакте">
+            <svg viewBox="0 0 24 24"><path d="M4.5 7h15A1.5 1.5 0 0 1 21 8.5v7A1.5 1.5 0 0 1 19.5 17h-15A1.5 1.5 0 0 1 3 15.5v-7A1.5 1.5 0 0 1 4.5 7z"/><path d="M7 10.5c0 0 .5 3 3.5 3M13.5 10.5c0 0-.25 3 3 3M17 10.5v3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="#about">Обо мне</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#process">Как работаем</a></li>
+          <li><a href="#testimonials">Отзывы</a></li>
+          <li><a href="#faq">Вопросы и ответы</a></li>
+          <li><a href="#blog">Блог</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="mailto:anna@vetrova.ru">anna@vetrova.ru</a></li>
+          <li><a href="tel:+79001234567">+7 900 123-45-67</a></li>
+          <li><a href="#">Telegram</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+        <div style="margin-top:28px;">
+          <h4>Режим работы</h4>
+          <ul>
+            <li><a href="#">Пн–Пт: 10:00 – 21:00</a></li>
+            <li><a href="#">Сб: 10:00 – 17:00</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026  Лейла Доева. Все права защищены.</span>
+      <span>Сайт создан с любовью ✦</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BREATHING WIDGET -->
+<div id="breath-widget" style="position:fixed;bottom:90px;left:28px;z-index:150;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity 0.5s;" title="Дышите вместе с цветком">
+  <svg id="breath-flower" width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 4px 16px rgba(201,123,85,0.25));">
+    <g id="petals" transform="translate(36,36)">
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#E8C4B0" opacity="0.85" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#C8946E" opacity="0.75" transform="rotate(45)"/>
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#E8C4B0" opacity="0.85" transform="rotate(90)"/>
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#C8946E" opacity="0.75" transform="rotate(135)"/>
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#E8C4B0" opacity="0.85" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#C8946E" opacity="0.75" transform="rotate(225)"/>
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#E8C4B0" opacity="0.85" transform="rotate(270)"/>
+      <ellipse cx="0" cy="-13" rx="5.5" ry="10" fill="#C8946E" opacity="0.75" transform="rotate(315)"/>
+      <circle cx="0" cy="0" r="7" fill="#C97B55"/>
+      <circle cx="0" cy="0" r="4" fill="#F5EBE0"/>
+    </g>
+  </svg>
+  <span style="font-family:'DM Sans',sans-serif;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);opacity:0.7;" id="breath-label">вдох</span>
+</div>
+
+<!-- THREE.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+/* ═══════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  rx += (mx - rx) * 0.18;
+  ry += (my - ry) * 0.18;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+  cursorRing.style.left = rx + 'px';
+  cursorRing.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('a,button,input,select,textarea,.service-card,.blog-card,.faq-question').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+/* ═══════════════════════════════════════
+   RIPPLE BUTTONS
+═══════════════════════════════════════ */
+document.querySelectorAll('.btn-primary').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const r = document.createElement('span');
+    r.className = 'btn-ripple';
+    const size = Math.max(this.offsetWidth, this.offsetHeight);
+    const rect = this.getBoundingClientRect();
+    r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;`;
+    this.appendChild(r);
+    setTimeout(() => r.remove(), 700);
+  });
+});
+
+/* ═══════════════════════════════════════
+   NAVBAR SCROLL
+═══════════════════════════════════════ */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  document.getElementById('scrolltop').classList.toggle('visible', window.scrollY > 400);
+});
+
+/* ═══════════════════════════════════════
+   MOBILE MENU
+═══════════════════════════════════════ */
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+/* ═══════════════════════════════════════
+   TYPEWRITER
+═══════════════════════════════════════ */
+const phrases = [
+  'Твоё спокойствие начинается здесь.',
+  'Безопасное пространство для перемен.',
+  'Ты заслуживаешь поддержки.'
+];
+let phraseIdx = 0, charIdx = 0, deleting = false;
+const tw = document.getElementById('typewriter-chars');
+function typeStep() {
+  const phrase = phrases[phraseIdx];
+  if (!deleting) {
+    charIdx++;
+    tw.textContent = phrase.slice(0, charIdx);
+    if (charIdx === phrase.length) {
+      deleting = true;
+      setTimeout(typeStep, 2200);
+      return;
+    }
+    setTimeout(typeStep, 55);
+  } else {
+    charIdx--;
+    tw.textContent = phrase.slice(0, charIdx);
+    if (charIdx === 0) {
+      deleting = false;
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+      setTimeout(typeStep, 400);
+      return;
+    }
+    setTimeout(typeStep, 28);
+  }
+}
+setTimeout(typeStep, 1400);
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ═══════════════════════════════════════
+   COUNTERS
+═══════════════════════════════════════ */
+function animCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1600;
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(eased * target);
+    el.textContent = current.toLocaleString('ru') + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animCounter(e.target);
+      counterObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter-num').forEach(el => counterObserver.observe(el));
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS SLIDER
+═══════════════════════════════════════ */
+let currentSlide = 0;
+const track = document.getElementById('testTrack');
+const dots = document.querySelectorAll('.test-dot');
+function goSlide(idx) {
+  currentSlide = idx;
+  const cardW = track.children[0].offsetWidth + 28;
+  track.style.transform = `translateX(-${idx * cardW * 2}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+let autoSlide = setInterval(() => goSlide((currentSlide + 1) % 2), 5000);
+track.parentElement.addEventListener('mouseenter', () => clearInterval(autoSlide));
+track.parentElement.addEventListener('mouseleave', () => { autoSlide = setInterval(() => goSlide((currentSlide + 1) % 2), 5000); });
+
+/* ═══════════════════════════════════════
+   FAQ ACCORDION
+═══════════════════════════════════════ */
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+/* ═══════════════════════════════════════
+   FORM VALIDATION & SUBMIT
+═══════════════════════════════════════ */
+function validateField(id, condition, errId) {
+  const el = document.getElementById(id);
+  const err = document.getElementById(errId);
+  const valid = condition(el.value);
+  err.classList.toggle('visible', !valid);
+  el.style.borderColor = valid ? '' : '#c0392b';
+  return valid;
+}
+function submitForm(e) {
+  e.preventDefault();
+  const v1 = validateField('fname', v => v.trim().length >= 2, 'err-fname');
+  const v2 = validateField('phone', v => v.replace(/\D/g, '').length >= 10, 'err-phone');
+  const v3 = validateField('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), 'err-email');
+  const v4 = validateField('service', v => v !== '', 'err-service');
+  if (!v1 || !v2 || !v3 || !v4) return;
+  const btn = document.getElementById('submitText');
+  btn.textContent = 'Отправляю...';
+  setTimeout(() => {
+    document.getElementById('bookingForm').reset();
+    btn.textContent = 'Отправить заявку';
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4500);
+  }, 1200);
+}
+
+/* ═══════════════════════════════════════
+   THREE.JS — FLOATING SPHERES
+═══════════════════════════════════════ */
+(function initThree() {
+  const canvas = document.getElementById('three-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 5;
+
+  // Ambient + directional light
+  scene.add(new THREE.AmbientLight(0xf5ebe0, 0.8));
+  const dl = new THREE.DirectionalLight(0xc97b55, 1.2);
+  dl.position.set(3, 4, 2);
+  scene.add(dl);
+  const dl2 = new THREE.DirectionalLight(0x8b9e7c, 0.7);
+  dl2.position.set(-3, -1, -2);
+  scene.add(dl2);
+
+  // Spheres
+  const spheres = [];
+  const positions = [
+    [-3.5, 1.5, -1], [3, -1, -0.5], [0, 2.5, -2],
+    [-1.5, -2, -1], [2.5, 2, -1.5], [0.5, -1.5, 0],
+  ];
+  const colors = [0xc8946e, 0x8b9e7c, 0xe8c4b0, 0x5a6e50, 0xc97b55, 0xc4d1b8];
+  positions.forEach((pos, i) => {
+    const geo = new THREE.SphereGeometry(0.4 + Math.random() * 0.5, 32, 32);
+    const mat = new THREE.MeshPhongMaterial({
+      color: colors[i],
+      transparent: true,
+      opacity: 0.3 + Math.random() * 0.25,
+      shininess: 80,
+      specular: 0xffffff,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(...pos);
+    mesh._phase = Math.random() * Math.PI * 2;
+    mesh._speed = 0.3 + Math.random() * 0.4;
+    scene.add(mesh);
+    spheres.push(mesh);
+  });
+
+  // Torus
+  const torusGeo = new THREE.TorusGeometry(1.2, 0.35, 24, 80);
+  const torusMat = new THREE.MeshPhongMaterial({ color: 0xc97b55, transparent: true, opacity: 0.15, shininess: 120, specular: 0xffffff });
+  const torus = new THREE.Mesh(torusGeo, torusMat);
+  torus.position.set(2.5, 0.5, -2);
+  scene.add(torus);
+
+  let mouse = new THREE.Vector2();
+  document.addEventListener('mousemove', e => {
+    mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.008;
+    spheres.forEach((s, i) => {
+      s.position.y += Math.sin(t * s._speed + s._phase) * 0.003;
+      s.position.x += Math.cos(t * s._speed * 0.7 + s._phase) * 0.002;
+      s.rotation.y += 0.004;
+    });
+    torus.rotation.x += 0.005;
+    torus.rotation.y += 0.008;
+    camera.position.x += (mouse.x * 0.3 - camera.position.x) * 0.04;
+    camera.position.y += (mouse.y * 0.2 - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+/* ═══════════════════════════════════════
+   BREATHING FLOWER ANIMATION
+═══════════════════════════════════════ */
+(function initBreath() {
+  const widget = document.getElementById('breath-widget');
+  const petals = document.getElementById('petals');
+  const label = document.getElementById('breath-label');
+
+  // Show widget after 2s
+  setTimeout(() => { widget.style.opacity = '1'; }, 2000);
+
+  // 4-count inhale, 1 hold, 4 exhale, 1 hold (4-7-8 simplified)
+  const phases = [
+    { name: 'вдох',    duration: 4000, scaleFrom: 0.72, scaleTo: 1.18, rotFrom: 0,   rotTo: 22  },
+    { name: 'держите', duration: 1400, scaleFrom: 1.18, scaleTo: 1.18, rotFrom: 22,  rotTo: 22  },
+    { name: 'выдох',   duration: 4000, scaleFrom: 1.18, scaleTo: 0.72, rotFrom: 22,  rotTo: 0   },
+    { name: 'пауза',   duration: 1400, scaleFrom: 0.72, scaleTo: 0.72, rotFrom: 0,   rotTo: 0   },
+  ];
+
+  let phaseIdx = 0;
+  let startTime = null;
+  let rafId;
+
+  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  function breathStep(ts) {
+    if (!startTime) startTime = ts;
+    const phase = phases[phaseIdx];
+    const elapsed = ts - startTime;
+    const progress = Math.min(elapsed / phase.duration, 1);
+    const eased = easeInOut(progress);
+
+    const scale = phase.scaleFrom + (phase.scaleTo - phase.scaleFrom) * eased;
+    const rot = phase.rotFrom + (phase.rotTo - phase.rotFrom) * eased;
+
+    petals.setAttribute('transform', `translate(36,36) scale(${scale}) rotate(${rot})`);
+    if (progress < 1) {
+      rafId = requestAnimationFrame(breathStep);
+    } else {
+      phaseIdx = (phaseIdx + 1) % phases.length;
+      label.textContent = phases[phaseIdx].name;
+      startTime = null;
+      rafId = requestAnimationFrame(breathStep);
+    }
+  }
+
+  label.textContent = phases[0].name;
+  rafId = requestAnimationFrame(breathStep);
+})();
+</script>
+</body>
+</html>
